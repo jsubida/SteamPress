@@ -201,7 +201,7 @@ struct UserAdminController: RouteCollection {
         }
 
         do {
-            try CreateUserData.validate(req)
+            try CreateUserData.validate(content: req)
         } catch {
             createUserErrors.append("The username provided is not valid")
             usernameError = true
