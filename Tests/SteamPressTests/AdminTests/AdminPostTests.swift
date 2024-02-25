@@ -29,10 +29,10 @@ class AdminPostTests: XCTestCase {
     func testPostCanBeCreated() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData()
         let response = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -65,10 +65,10 @@ class AdminPostTests: XCTestCase {
 
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData()
         let response = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: initialPostData.author)
@@ -103,9 +103,9 @@ class AdminPostTests: XCTestCase {
     func testPostCannotBeCreatedIfDraftAndPublishNotSet() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
         }
         let createData = CreatePostData()
 
@@ -117,9 +117,9 @@ class AdminPostTests: XCTestCase {
     func testCreatePostMustIncludeTitle() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData()
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -138,9 +138,9 @@ class AdminPostTests: XCTestCase {
     func testCreatePostMustIncludeContents() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var title = "Post Title"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData()
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -156,10 +156,10 @@ class AdminPostTests: XCTestCase {
     func testPresenterGetsDataIfValidationOfDataFails() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
-            let contents = ""
+            var title = "Post Title"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
+            var contents = ""
         }
         let createData = CreatePostData()
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -178,10 +178,10 @@ class AdminPostTests: XCTestCase {
     func testCreatePostWithDraftDoesNotPublishPost() throws {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let draft = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var draft = true
         }
         let createData = CreatePostData()
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -199,10 +199,10 @@ class AdminPostTests: XCTestCase {
 
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData()
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
@@ -220,9 +220,9 @@ class AdminPostTests: XCTestCase {
     func testPostCanBeUpdated() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title")
@@ -243,10 +243,10 @@ class AdminPostTests: XCTestCase {
     func testPostCanBeUpdatedAndUpdateSlugURL() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let updateSlugURL = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var updateSlugURL = true
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title")
@@ -292,8 +292,8 @@ class AdminPostTests: XCTestCase {
 
         struct UpdateData: Content {
             let title: String
-            let contents = "Updated contents"
-            let tags = [String]()
+            var contents = "Updated contents"
+            var tags = [String]()
         }
 
         let updateData = UpdateData(title: testData.post.title)
@@ -308,9 +308,9 @@ class AdminPostTests: XCTestCase {
 
         struct UpdateData: Content {
             let title: String
-            let contents = "Updated contents"
-            let tags = [String]()
-            let updateSlugURL = true
+            var contents = "Updated contents"
+            var tags = [String]()
+            var updateSlugURL = true
         }
 
         let updateData = UpdateData(title: "Some New Title")
@@ -331,8 +331,8 @@ class AdminPostTests: XCTestCase {
 
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
             let tags: [String]
         }
 
@@ -354,9 +354,9 @@ class AdminPostTests: XCTestCase {
     func testLastUpdatedTimeGetsChangedWhenEditingAPost() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title")
@@ -375,10 +375,10 @@ class AdminPostTests: XCTestCase {
     func testCreatedTimeSetWhenPublishingADraft() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title", published: false)
@@ -397,10 +397,10 @@ class AdminPostTests: XCTestCase {
     func testCreatedTimeSetAndMarkedAsDraftWhenSavingADraft() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let draft = true
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var draft = true
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title", published: false)
@@ -419,9 +419,9 @@ class AdminPostTests: XCTestCase {
     func testEditingPageWithInvalidDataPassesExistingDataToPresenter() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = ""
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
+            var title = ""
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title")
@@ -451,9 +451,9 @@ class AdminPostTests: XCTestCase {
     func testEditingPageWithInvalidContentsDataPassesExistingDataToPresenter() throws {
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "A new title"
-            let contents = ""
-            let tags = ["First Tag", "Second Tag"]
+            var title = "A new title"
+            var contents = ""
+            var tags = ["First Tag", "Second Tag"]
         }
 
         let testData = try testWorld.createPost(title: "Initial title", contents: "Some initial contents", slugUrl: "initial-title")
@@ -550,8 +550,8 @@ class AdminPostTests: XCTestCase {
 
         struct UpdatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let title = "Post Title"
-            let contents = "# Post Title\n\nWe have a post"
+            var title = "Post Title"
+            var contents = "# Post Title\n\nWe have a post"
             let tags: [String]
         }
 
@@ -588,9 +588,9 @@ class AdminPostTests: XCTestCase {
         struct CreatePostData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
             let title: String
-            let contents = "# Post Title\n\nWe have a post"
-            let tags = ["First Tag", "Second Tag"]
-            let publish = true
+            var contents = "# Post Title\n\nWe have a post"
+            var tags = ["First Tag", "Second Tag"]
+            var publish = true
         }
         let createData = CreatePostData(title: title)
         _ = try testWorld.getResponse(to: createPostPath, body: createData, loggedInUser: user)
