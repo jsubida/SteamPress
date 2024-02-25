@@ -91,8 +91,8 @@ class LoginTests: XCTestCase {
     func testUserCanResetPassword() throws {
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let password = "Th3S@m3password"
-            let confirmPassword = "Th3S@m3password"
+            var password = "Th3S@m3password"
+            var confirmPassword = "Th3S@m3password"
         }
 
         let data = ResetPasswordData()
@@ -107,8 +107,8 @@ class LoginTests: XCTestCase {
     func testUserCannotResetPasswordWithMismatchingPasswords() throws {
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let password = "Th3S@m3password"
-            let confirmPassword = "An0th3rPass!"
+            var password = "Th3S@m3password"
+            var confirmPassword = "An0th3rPass!"
         }
 
         let data = ResetPasswordData()
@@ -129,7 +129,7 @@ class LoginTests: XCTestCase {
     func testUserCannotResetPasswordWithoutPassword() throws {
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let confirmPassword = "Th3S@m3password"
+            var confirmPassword = "Th3S@m3password"
         }
 
         let data = ResetPasswordData()
@@ -146,7 +146,7 @@ class LoginTests: XCTestCase {
     func testUserCannotResetPasswordWithoutConfirmPassword() throws {
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let password = "Th3S@m3password"
+            var password = "Th3S@m3password"
         }
 
         let data = ResetPasswordData()
@@ -162,8 +162,8 @@ class LoginTests: XCTestCase {
     func testUserCannotResetPasswordWithShortPassword() throws {
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let password = "apassword"
-            let confirmPassword = "apassword"
+            var password = "apassword"
+            var confirmPassword = "apassword"
         }
 
         let data = ResetPasswordData()
@@ -177,8 +177,8 @@ class LoginTests: XCTestCase {
         let user2 = testWorld.createUser(name: "Han", username: "hans", resetPasswordRequired: true)
         struct ResetPasswordData: Content {
             static let defaultContentType = HTTPMediaType.urlEncodedForm
-            let password = "alongpassword"
-            let confirmPassword = "alongpassword"
+            var password = "alongpassword"
+            var confirmPassword = "alongpassword"
         }
 
         let data = ResetPasswordData()
