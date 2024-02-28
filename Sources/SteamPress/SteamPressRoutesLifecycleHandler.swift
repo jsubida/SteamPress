@@ -1,6 +1,6 @@
 import Vapor
 
-public class SteamPressRoutesLifecycleHandler: LifecycleHandler {
+public final class SteamPressRoutesLifecycleHandler: LifecycleHandler {
 
     var configuration: SteamPressConfiguration
 
