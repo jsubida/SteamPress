@@ -55,7 +55,7 @@ struct BlogController: RouteCollection {
     }
 
     func blogPostIndexRedirectHandler(_ req: Request) throws -> Response {
-        return req.redirect(to: pathCreator.createPath(for: pathCreator.blogPath), type: .permanent)
+        return req.redirect(to: pathCreator.createPath(for: pathCreator.blogPath), redirectType: .permanent)
     }
 
     func blogPostHandler(_ req: Request) throws -> EventLoopFuture<View> {
